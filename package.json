@@ -1,7 +1,7 @@
 {
   "name": "@wyatex/koishi-plugin-tts",
   "description": "为 YesImBot 提供TTS(文本转语音)功能",
-  "version": "0.2.2",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "homepage": "https://github.com/wyatex/koishi-plugin-tts",
@@ -14,7 +14,7 @@
     "MiaowFISH <neko-project@outlook.com>"
   ],
   "scripts": {
-    "build": "tsc && tsc-alias && node esbuild.config.mjs",
+    "build": "tsdown",
     "dev": "tsc -w --preserveWatchOutput",
     "lint": "eslint . --ext .ts",
     "clean": "rm -rf lib .turbo tsconfig.tsbuildinfo",
@@ -40,11 +40,16 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@msgpack/msgpack": "^3.1.2"
+    "@msgpack/msgpack": "^3.1.2",
+    "uuid": "^14.0.0",
+    "ws": "^8.21.0"
   },
   "devDependencies": {
     "koishi": "^4.18.7",
-    "koishi-plugin-yesimbot": "^3.0.2"
+    "koishi-plugin-yesimbot": "^3.0.2",
+    "tsdown": "^0.22.1",
+    "typescript": "^6.0.3",
+    "yml-register": "^1.2.5"
   },
   "peerDependencies": {
     "koishi": "^4.18.7",

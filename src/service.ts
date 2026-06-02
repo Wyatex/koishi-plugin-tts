@@ -5,12 +5,13 @@ import { TTSAdapter } from "./adapters/base";
 import { CosyVoiceAdapter, CosyVoiceConfig } from "./adapters/cosyvoice";
 import { FishAudioAdapter, FishAudioConfig } from "./adapters/fish-audio";
 import { IndexTTS2Adapter, IndexTTS2Config } from "./adapters/index-tts2";
+import { MimoVoiceCloneAdapter, MimoVoiceCloneConfig } from "./adapters/mimo-voiceclone";
 import { OpenAudioAdapter, OpenAudioConfig } from "./adapters/open-audio";
 import { BaseTTSParams } from "./types";
 
 export const Config = Schema.intersect([
     Schema.object({
-        provider: Schema.union(["cosyvoice", "index-tts2", "fish-audio", "open-audio"])
+        provider: Schema.union(["cosyvoice", "index-tts2", "fish-audio", "mimo-voiceclone", "open-audio"])
             .default("cosyvoice")
             .description("选择要使用的 TTS 服务提供商"),
     }),
@@ -28,6 +29,10 @@ export const Config = Schema.intersect([
             "fish-audio": FishAudioConfig,
         }),
         Schema.object({
+            provider: Schema.const("mimo-voiceclone"),
+            "mimo-voiceclone": MimoVoiceCloneConfig,
+        }),
+        Schema.object({
             provider: Schema.const("open-audio"),
             "open-audio": OpenAudioConfig,
         }),
@@ -35,10 +40,11 @@ export const Config = Schema.intersect([
 ]);
 
 export type Config = {
-    provider: "cosyvoice" | "index-tts2" | "fish-audio" | "open-audio";
+    provider: "cosyvoice" | "index-tts2" | "fish-audio" | "mimo-voiceclone" | "open-audio";
     cosyvoice: CosyVoiceConfig;
     "index-tts2": IndexTTS2Config;
     "fish-audio": FishAudioConfig;
+    "mimo-voiceclone": MimoVoiceCloneConfig;
     "open-audio": OpenAudioConfig;
 };
 
@@ -75,6 +81,8 @@ export class TTSService {
                 return new IndexTTS2Adapter(this.ctx, providerConfig as IndexTTS2Config);
             case "fish-audio":
                 return new FishAudioAdapter(this.ctx, providerConfig as FishAudioConfig);
+            case "mimo-voiceclone":
+                return new MimoVoiceCloneAdapter(this.ctx, providerConfig as MimoVoiceCloneConfig);
             case "open-audio":
                 return new OpenAudioAdapter(this.ctx, providerConfig as OpenAudioConfig);
             default:
