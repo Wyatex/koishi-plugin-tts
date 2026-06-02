@@ -4,7 +4,7 @@
   "version": "0.0.5",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "homepage": "https://github.com/wyatex/koishi-plugin-tts",
+  "homepage": "https://github.com/Wyatex/koishi-plugin-tts",
   "files": [
     "lib",
     "dist",
@@ -30,10 +30,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wyatex/koishi-plugin-tts.git"
+    "url": "git+https://github.com/Wyatex/koishi-plugin-tts.git"
   },
   "bugs": {
-    "url": "https://github.com/wyatex/koishi-plugin-tts/issues"
+    "url": "https://github.com/Wyatex/koishi-plugin-tts/issues"
   },
   "exports": {
     ".": "./lib/index.js",
