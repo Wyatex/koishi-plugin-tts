@@ -7,6 +7,7 @@ import { FishAudioAdapter, FishAudioConfig } from "./adapters/fish-audio";
 import { IndexTTS2Adapter, IndexTTS2Config } from "./adapters/index-tts2";
 import { MimoVoiceCloneAdapter, MimoVoiceCloneConfig } from "./adapters/mimo-voiceclone";
 import { OpenAudioAdapter, OpenAudioConfig } from "./adapters/open-audio";
+import { MinimaxVoiceCloneAdapter, MinimaxVoiceCloneConfig } from './adapters/minimax-voiceclone'
 import { BaseTTSParams } from "./types";
 
 export const Config = Schema.intersect([
@@ -33,6 +34,10 @@ export const Config = Schema.intersect([
             "mimo-voiceclone": MimoVoiceCloneConfig,
         }),
         Schema.object({
+            provider: Schema.const("minimax-voiceclone"),
+            "minimax-voiceclone": MinimaxVoiceCloneConfig,
+        }),
+        Schema.object({
             provider: Schema.const("open-audio"),
             "open-audio": OpenAudioConfig,
         }),
@@ -40,11 +45,12 @@ export const Config = Schema.intersect([
 ]);
 
 export type Config = {
-    provider: "cosyvoice" | "index-tts2" | "fish-audio" | "mimo-voiceclone" | "open-audio";
+    provider: "cosyvoice" | "index-tts2" | "fish-audio" | "mimo-voiceclone" | "minimax-voiceclone" | "open-audio";
     cosyvoice: CosyVoiceConfig;
     "index-tts2": IndexTTS2Config;
     "fish-audio": FishAudioConfig;
     "mimo-voiceclone": MimoVoiceCloneConfig;
+    "minimax-voiceclone": MinimaxVoiceCloneConfig;
     "open-audio": OpenAudioConfig;
 };
 
@@ -83,6 +89,8 @@ export class TTSService {
                 return new FishAudioAdapter(this.ctx, providerConfig as FishAudioConfig);
             case "mimo-voiceclone":
                 return new MimoVoiceCloneAdapter(this.ctx, providerConfig as MimoVoiceCloneConfig);
+            case "minimax-voiceclone":
+                return new MinimaxVoiceCloneAdapter(this.ctx, providerConfig as MinimaxVoiceCloneConfig);
             case "open-audio":
                 return new OpenAudioAdapter(this.ctx, providerConfig as OpenAudioConfig);
             default:
