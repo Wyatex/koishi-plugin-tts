@@ -12,7 +12,7 @@ import { BaseTTSParams } from "./types";
 
 export const Config = Schema.intersect([
     Schema.object({
-        provider: Schema.union(["cosyvoice", "index-tts2", "fish-audio", "mimo-voiceclone", "open-audio"])
+        provider: Schema.union(["cosyvoice", "index-tts2", "fish-audio", "mimo-voiceclone", "minimax-voiceclone", "open-audio"])
             .default("cosyvoice")
             .description("选择要使用的 TTS 服务提供商"),
     }),
