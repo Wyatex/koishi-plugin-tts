@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         # 资深开发者通常使用 pnpm，如果你用 pnpm 请替换为：
         # run: pnpm install --frozen-lockfile
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build TypeScript
         # 执行 tsc，将源码降维编译为 JS 并生成 .d.ts
